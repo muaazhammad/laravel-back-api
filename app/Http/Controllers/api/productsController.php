@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Http\Request;
+use App\Http\Resources\Product  as ProductResource;
 
 class productsController extends Controller
 {
@@ -17,7 +18,8 @@ class productsController extends Controller
     {
         //
          $products = Product::all();
-        return response()->json($products);
+        // return response()->json($products);
+        return response()->json (ProductResource::collection($products));           //using apiresource (single)
 
     }
 

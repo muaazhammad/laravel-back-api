@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Transaction  as TransactionResource;
 
 class transactionController extends Controller
 {
@@ -16,7 +17,8 @@ class transactionController extends Controller
     public function index()
     {
         $transactions = Transaction::all();
-        return response()->json($transactions);
+        return response()->json(TransactionResource::collection($transactions));
+    
         //
     }
 
@@ -164,15 +166,8 @@ class transactionController extends Controller
             ], 400)
             ;
         }
-        return $transactions;
-        // return response('helllo')
-        // ->header('Access-Control-Allow-Origin',"*")
-        // ->header('Access-Control-Allow-Methods',"PUT,POST,DELETE,GET,OPTIONS")
-        // ->header('Access-Control-Allow-Headers',"Accept,Authorization,Content-Type ");
+        return response()->json(TransactionResource::collection($transactions));
+    
 
-        // return response($transactions)
-        // ->header('Cache-Control', null)
-        // ->header('X-Requested-With', null,)
-        // ->header('Access-Control-Allow-Headers',"Accept,Authorization,Content-Type ");
     }
 }

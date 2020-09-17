@@ -12,4 +12,9 @@ class Supplier extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function products()
+    {
+        return $this->hasMany('App\Product');
+    }
 }
