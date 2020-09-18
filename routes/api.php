@@ -26,12 +26,15 @@ Route::post('register', 'api\ApiController@register');
 
 //following are the api routes protected by auth.jwt middleware
 //only authorized user(having a token) can access to these routes
-// Route::group(['middleware' => 'auth.jwt'], function () {         //auth is deactive
+Route::group(['middleware' => 'auth.jwt'], function () {         //auth is deactive
+
+    Route::get('products', 'api\productsController@index');
+
 
     Route::get('logout', 'api\ApiController@logout');
     Route::get('user', 'api\ApiController@getAuthUser');
 
-    Route::get('products', 'api\productsController@index');
+    // Route::get('products', 'api\productsController@index');
     Route::get('products/{id}', 'api\productsController@show');
     Route::post('products', 'api\productsController@store');
     Route::put('products/{id}', 'api\productsController@update');
@@ -58,7 +61,8 @@ Route::post('register', 'api\ApiController@register');
    Route::put('transactions/{id}', 'api\transactionController@update');
    Route::delete('transactions/{id}', 'api\transactionController@destroy');
    Route::get('transactionsbymonth/{id}', 'api\transactionController@transactionsByMonth');
-// });
+   Route::get('totalbymonth/{id}', 'api\transactionController@getTotal');
+});
 
 
 

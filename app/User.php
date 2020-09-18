@@ -48,6 +48,11 @@ class User extends Authenticatable  implements JWTSubject
         return $this->hasMany('App\Products');
     }
 
+    public function transactions()
+    {
+        return $this->hasMany('App\Transaction');
+    }
+
     public function months()
     {
         return $this->hasMany('App\Month');

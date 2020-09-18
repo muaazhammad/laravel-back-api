@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Transaction  as TransactionResource;
 
@@ -16,7 +17,8 @@ class transactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::all();
+        $user = auth()->user();
+        $transactions = Transaction::where('user_id',$user->id)->get();
         return response()->json(TransactionResource::collection($transactions));
     
         //
@@ -48,9 +50,10 @@ class transactionController extends Controller
         //     'user_id' => 'required|integer',
     
         // ]);
+        $user = auth()->user();
 
         $transaction = new Transaction();
-        $transaction->user_id = $request->user_id;
+        $transaction->user_id = $user->id;
         $transaction->product_id = $request->product_id;
         $transaction->supplier_id = $request->supplier_id;
         $transaction->month_id = $request->month_id;
@@ -167,6 +170,28 @@ class transactionController extends Controller
             ;
         }
         return response()->json(TransactionResource::collection($transactions));
+    
+
+    }
+
+
+    public function getTotal($id)
+    {
+        //
+        // $balance = DB::table('data')->where('user_id' '=' $id)->sum('balance');
+        // $sum = DB::table('transactions')->sum('balance')->where('user_id' '=' $id);
+        // $sum= Transaction::sum('price')->where('month_id',$id)->get();
+        $sum= Transaction::where('month_id',$id)->sum('price');
+        // dd($transactions);
+
+        if (!$sum) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, sum not found'
+            ], 400)
+            ;
+        }
+        return $sum;
     
 
     }

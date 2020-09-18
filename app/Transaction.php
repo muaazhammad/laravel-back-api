@@ -22,4 +22,9 @@ class Transaction extends Model
     {
         return $this->belongsTo('App\Month');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

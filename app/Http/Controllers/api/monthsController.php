@@ -16,7 +16,8 @@ class monthsController extends Controller
     public function index()
     {
         //
-        $months = Month::all();
+        $user = auth()->user();
+        $months = Month::where('user_id',$user->id)->get();
         return response()->json($months);
     }
 

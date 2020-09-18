@@ -16,8 +16,12 @@ class supplierController extends Controller
     public function index()
     {
         //
-        $suppliers = Supplier::all();
+        $user = auth()->user();
+        $suppliers = Supplier::where('user_id',$user->id)->get();
+        //  $suppliers = Supplier::all();
+
         return response()->json($suppliers);
+        
 
     }
 

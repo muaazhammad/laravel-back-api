@@ -17,7 +17,9 @@ class productsController extends Controller
     public function index()
     {
         //
-         $products = Product::all();
+        $user = auth()->user();
+       
+         $products = Product::where('user_id',$user->id)->get();
         // return response()->json($products);
         return response()->json (ProductResource::collection($products));           //using apiresource (single)
 

@@ -21,7 +21,8 @@ class Product extends JsonResource
             'name'=>$this->name,
             'price'=>$this->price,
             'supplier_id'=>$this->supplier_id,
-            'supplier'=>$this->supplier->name,
+            // 'supplier'=>$this->supplier->name,
+            'supplier'=>'ggg',
 
         ];
         // return parent::toArray($request);
