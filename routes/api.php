@@ -37,6 +37,9 @@ Route::group(['middleware' => 'auth.jwt'], function () {         //auth is deact
     Route::post('products', 'api\productsController@store');
     Route::put('products/{id}', 'api\productsController@update');
     Route::delete('products/{id}', 'api\productsController@destroy');
+    Route::get('totalProducts', 'api\productsController@totalProducts');
+
+    
 
 Route::get('transactions', 'api\transactionController@index');
    Route::post('transactions', 'api\transactionController@store');
@@ -51,6 +54,7 @@ Route::get('transactions', 'api\transactionController@index');
     Route::post('suppliers', 'api\supplierController@store');
     Route::put('suppliers/{id}', 'api\supplierController@update');
     Route::delete('suppliers/{id}', 'api\supplierController@destroy');
+    Route::get('totalSuppliers', 'api\supplierController@totalSuppliers');
 
 //
    Route::get('months', 'api\monthsController@index');

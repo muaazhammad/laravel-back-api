@@ -177,10 +177,7 @@ class transactionController extends Controller
 
     public function getTotal($id)
     {
-        //
-        // $balance = DB::table('data')->where('user_id' '=' $id)->sum('balance');
-        // $sum = DB::table('transactions')->sum('balance')->where('user_id' '=' $id);
-        // $sum= Transaction::sum('price')->where('month_id',$id)->get();
+        
         $sum= Transaction::where('month_id',$id)->sum('price');
         // dd($transactions);
 

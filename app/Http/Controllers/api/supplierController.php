@@ -57,7 +57,7 @@ class supplierController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Sorry, product could not be added'
-            ], 500);
+            ], 422);
         }
     }
 
@@ -121,5 +121,24 @@ class supplierController extends Controller
         }
         $supplier->delete();
         return response()->json("item is deleted " , 200);
+    }
+
+    public function totalSuppliers()
+    {
+        $user = auth()->user();
+        
+        $total= Supplier::where('user_id',$user->id)->count('name');
+        // dd($transactions);
+
+        if (!$total) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, no product found'
+            ], 400)
+            ;
+        }
+        return $total;
+    
+
     }
 }
