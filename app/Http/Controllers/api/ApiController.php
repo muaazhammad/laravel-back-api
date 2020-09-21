@@ -37,6 +37,7 @@ class ApiController extends Controller
     {
         $input = $request->only('email', 'password');
         $jwt_token = null;
+        // $user=auth()->user();
 
         if (!$jwt_token = JWTAuth::attempt($input)) {
             return response()->json([
@@ -47,6 +48,7 @@ class ApiController extends Controller
         return response()->json([
             'success' => true,
             'token' => $jwt_token,
+            'user'=>auth()->user(),
         ]);
     }
 

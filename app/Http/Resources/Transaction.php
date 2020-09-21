@@ -15,6 +15,7 @@ class Transaction extends JsonResource
     public function toArray($request)
     {
 
+        // dd($request);
         return [
             
             'id' => $this->id,
@@ -24,8 +25,8 @@ class Transaction extends JsonResource
             'date'=>$this->date,
             'quantity'=>$this->quantity,
             'price'=>$this->price,
-            'supplier'=>$this->supplier->name,
             'product'=>$this->product->name,
+            'supplier'=>$this->supplier->name,
             'month'=>$this->month->name,
             'created_at'=>$this->created_at,
             'updated_at'=>$this->updated_at,

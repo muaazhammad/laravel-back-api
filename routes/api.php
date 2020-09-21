@@ -28,18 +28,23 @@ Route::post('register', 'api\ApiController@register');
 //only authorized user(having a token) can access to these routes
 Route::group(['middleware' => 'auth.jwt'], function () {         //auth is deactive
 
-    Route::get('products', 'api\productsController@index');
-
 
     Route::get('logout', 'api\ApiController@logout');
     Route::get('user', 'api\ApiController@getAuthUser');
 
-    // Route::get('products', 'api\productsController@index');
+    Route::get('products', 'api\productsController@index');
     Route::get('products/{id}', 'api\productsController@show');
     Route::post('products', 'api\productsController@store');
     Route::put('products/{id}', 'api\productsController@update');
     Route::delete('products/{id}', 'api\productsController@destroy');
 
+Route::get('transactions', 'api\transactionController@index');
+   Route::post('transactions', 'api\transactionController@store');
+   Route::get('transactions/{id}', 'api\transactionController@show');
+   Route::put('transactions/{id}', 'api\transactionController@update');
+   Route::delete('transactions/{id}', 'api\transactionController@destroy');
+   Route::get('transactionsbymonth/{id}', 'api\transactionController@transactionsByMonth');
+   Route::get('totalbymonth/{id}', 'api\transactionController@getTotal');
 
     Route::get('suppliers', 'api\supplierController@index');
     Route::get('suppliers/{id}', 'api\supplierController@show');
@@ -55,13 +60,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {         //auth is deact
    Route::delete('months/{id}', 'api\monthsController@destroy');
 
 
-   Route::get('transactions', 'api\transactionController@index');
-   Route::get('transactions/{id}', 'api\transactionController@show');
-   Route::post('transactions', 'api\transactionController@store');
-   Route::put('transactions/{id}', 'api\transactionController@update');
-   Route::delete('transactions/{id}', 'api\transactionController@destroy');
-   Route::get('transactionsbymonth/{id}', 'api\transactionController@transactionsByMonth');
-   Route::get('totalbymonth/{id}', 'api\transactionController@getTotal');
+   
 });
 
 
