@@ -17,4 +17,10 @@ class Supplier extends Model
     {
         return $this->hasMany('App\Product');
     }
+
+    public function transaction()
+    {
+        return $this->hasMany('App\Transaction');
+    }
+
 }

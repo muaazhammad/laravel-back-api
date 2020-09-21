@@ -120,6 +120,9 @@ class productsController extends Controller
         if (is_null($product)){
             return response()->json("not found" , 404);
         }
+        if (count($product->transactions)){
+            return response()->json("can't delete a prodcut which has transaactions" , 422);
+        }
         $product->delete();
         return response()->json("item is deleted " , 200);
     }
