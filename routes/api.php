@@ -17,17 +17,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 //api routes to login and register
 Route::post('login', 'api\ApiController@login');
 Route::post('register', 'api\ApiController@register');
 
-
-
 //following are the api routes protected by auth.jwt middleware
 //only authorized user(having a token) can access to these routes
-Route::group(['middleware' => 'auth.jwt'], function () {         //auth is deactive
-
+Route::group(['middleware' => 'auth.jwt'], function () {      
 
     Route::get('logout', 'api\ApiController@logout');
     Route::get('user', 'api\ApiController@getAuthUser');
@@ -39,15 +35,15 @@ Route::group(['middleware' => 'auth.jwt'], function () {         //auth is deact
     Route::delete('products/{id}', 'api\productsController@destroy');
     Route::get('totalProducts', 'api\productsController@totalProducts');
 
-    
+    Route::get('transactions', 'api\transactionController@index');
+    Route::post('transactions', 'api\transactionController@store');
+    Route::get('transactions/{id}', 'api\transactionController@show');
+    Route::put('transactions/{id}', 'api\transactionController@update');
+    Route::delete('transactions/{id}', 'api\transactionController@destroy');
+    Route::get('transactionsbymonth/{id}', 'api\transactionController@transactionsByMonth');
+    Route::get('totalbymonth/{id}', 'api\transactionController@getTotal');     // for single month
+    Route::get('totalPayable', 'api\transactionController@getTotalPayable');   //for all months
 
-Route::get('transactions', 'api\transactionController@index');
-   Route::post('transactions', 'api\transactionController@store');
-   Route::get('transactions/{id}', 'api\transactionController@show');
-   Route::put('transactions/{id}', 'api\transactionController@update');
-   Route::delete('transactions/{id}', 'api\transactionController@destroy');
-   Route::get('transactionsbymonth/{id}', 'api\transactionController@transactionsByMonth');
-   Route::get('totalbymonth/{id}', 'api\transactionController@getTotal');
 
     Route::get('suppliers', 'api\supplierController@index');
     Route::get('suppliers/{id}', 'api\supplierController@show');
@@ -56,17 +52,12 @@ Route::get('transactions', 'api\transactionController@index');
     Route::delete('suppliers/{id}', 'api\supplierController@destroy');
     Route::get('totalSuppliers', 'api\supplierController@totalSuppliers');
 
-//
-   Route::get('months', 'api\monthsController@index');
-   Route::get('months/{id}', 'api\monthsController@show');
-   Route::post('months', 'api\monthsController@store');
-   Route::put('months/{id}', 'api\monthsController@update');
-   Route::delete('months/{id}', 'api\monthsController@destroy');
-
-
-   
+    Route::get('months', 'api\monthsController@index');
+    Route::get('months/{id}', 'api\monthsController@show');
+    Route::post('months', 'api\monthsController@store');
+    Route::put('months/{id}', 'api\monthsController@update');
+    Route::delete('months/{id}', 'api\monthsController@destroy');
 });
-
 
 
 
@@ -103,10 +94,3 @@ Route::get('transactions', 'api\transactionController@index');
 //Route::post('password/reset', 'api\ResetPasswordController@reset')->name('password.update');
 //
 //
-
-
-
-
-
-
-

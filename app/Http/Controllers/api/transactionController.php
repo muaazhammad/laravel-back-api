@@ -192,4 +192,27 @@ class transactionController extends Controller
     
 
     }
+
+    public function getTotalPayable()
+    {
+        $user = auth()->user();
+        
+        $sum= Transaction::where('user_id',$user->id)->sum('price');
+        $tenRecentTransactions =Transaction::where('user_id',$user->id)->orderBy('date','desc')->limit(10)->get();
+        $dates=$tenRecentTransactions->pluck('date');
+        $price=$tenRecentTransactions->pluck('price');
+        // dd($transactions);
+
+        if (!$sum) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, sum not found'
+            ], 400)
+            ;
+        }
+        return response()->json(['sum' => $sum, 'dates'=> $dates ,'prices'=>$price] );
+    }
+
+
+
 }
