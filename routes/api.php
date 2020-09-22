@@ -47,7 +47,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
     Route::get('suppliers', 'api\supplierController@index');
     Route::get('suppliers/{id}', 'api\supplierController@show');
-    Route::post('suppliers', 'api\supplierController@store');
+    Route::post('suppliers/', 'api\supplierController@store');
     Route::put('suppliers/{id}', 'api\supplierController@update');
     Route::delete('suppliers/{id}', 'api\supplierController@destroy');
     Route::get('totalSuppliers', 'api\supplierController@totalSuppliers');
