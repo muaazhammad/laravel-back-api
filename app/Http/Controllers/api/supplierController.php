@@ -18,13 +18,8 @@ class supplierController extends Controller
         //
         $user = auth()->user();
         $suppliers = Supplier::where('user_id',$user->id)->get();
-        //  $suppliers = Supplier::all();
-
         return response()->json($suppliers);
-        
-
     }
-
 
 
     /**
@@ -46,7 +41,7 @@ class supplierController extends Controller
         $supplier->name = $request->name;
         $supplier->user_id = $request->user_id;
         $supplier->phone_number = $request->phone_number;
-
+    
         if ($supplier->save()) {
             return response()->json([
                 'success' => true,
@@ -56,7 +51,7 @@ class supplierController extends Controller
         else {
             return response()->json([
                 'success' => false,
-                'message' => 'Sorry, product could not be added'
+                'message' => 'Sorry, supplier could not be added'
             ], 422);
         }
     }
@@ -75,7 +70,7 @@ class supplierController extends Controller
         if (!$supplier) {
             return response()->json([
                 'success' => false,
-                'message' => 'Sorry, product with id ' . $id . ' cannot be found'
+                'message' => 'Sorry, supplier with id ' . $id . ' cannot be found'
             ], 400);
         }
         return $supplier;
@@ -123,17 +118,16 @@ class supplierController extends Controller
         return response()->json("item is deleted " , 200);
     }
 
+
+
     public function totalSuppliers()
     {
         $user = auth()->user();
-        
         $total= Supplier::where('user_id',$user->id)->count('name');
-        // dd($transactions);
-
         if (!$total) {
             return response()->json([
                 'success' => false,
-                'message' => 'Sorry, no product found'
+                'message' => 'Sorry, no supplier found'
             ], 400)
             ;
         }

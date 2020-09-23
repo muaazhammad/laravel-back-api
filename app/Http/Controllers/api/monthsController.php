@@ -45,7 +45,6 @@ class monthsController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'user_id' => 'required|integer',
-    
         ]);
 
         $month = new Month();
@@ -63,7 +62,7 @@ class monthsController extends Controller
         else {
             return response()->json([
                 'success' => false,
-                'message' => 'Sorry, product could not be added'
+                'message' => 'Sorry, Month could not be added'
             ], 500);
         }
     }

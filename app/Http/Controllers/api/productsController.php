@@ -18,13 +18,10 @@ class productsController extends Controller
     {
         //
         $user = auth()->user();
-       
          $products = Product::where('user_id',$user->id)->get();
-        // return response()->json($products);
-        return response()->json (ProductResource::collection($products));           //using apiresource (single)
+        return response()->json (ProductResource::collection($products));       
 
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -59,7 +56,6 @@ class productsController extends Controller
                 'message' => 'Sorry, product could not be added'
             ], 500);
         }
-
     }
 
     /**
@@ -130,10 +126,7 @@ class productsController extends Controller
     public function totalProducts()
     {
         $user = auth()->user();
-        
         $total= Product::where('user_id',$user->id)->count('name');
-        // dd($transactions);
-
         if (!$total) {
             return response()->json([
                 'success' => false,

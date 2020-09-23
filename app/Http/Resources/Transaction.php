@@ -15,7 +15,6 @@ class Transaction extends JsonResource
     public function toArray($request)
     {
 
-        // dd($request);
         return [
             
             'id' => $this->id,

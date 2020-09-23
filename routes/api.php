@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('tokencheck', 'api\ApiController@checking');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -57,6 +58,9 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('months', 'api\monthsController@store');
     Route::put('months/{id}', 'api\monthsController@update');
     Route::delete('months/{id}', 'api\monthsController@destroy');
+
+   
+    Route::get('tt', 'api\ApiController@check');
 });
 
 
