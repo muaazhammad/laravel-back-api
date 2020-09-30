@@ -9,9 +9,9 @@ use Tymon\JWTAuth\Payload;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterAuthRequest;
+use Tymon\JWTAuth\Contracts\Providers\JWT;
 use Tymon\JWTAuth\Exceptions\JWTException;
-
-
+use phpDocumentor\Reflection\Types\Boolean;
 
 class ApiController extends Controller
 {
@@ -95,29 +95,14 @@ class ApiController extends Controller
         }
     }
 
-
-    public function checking(){
-
-        try {
-            JWTAuth::parseToken()->authenticate();
-      } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-
-        return 'tttttt';
-  
-          // do whatever you want to do if a token is expired
-  
-      } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-  
-          // do whatever you want to do if a token is invalid
-          return 'tttttkjhgt';
-
-  
-      } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
-  
-          // do whatever you want to do if a token is not present
-          return 'tttttjhgjhgt';
-      }
-      return 'ok';
+    public function isTokenValid() {
+    $token =JWTAuth::getToken();
+    if(JWTAuth::check()){
+        return "true2";
+    }
+    else {
+        return "false2";
+    }
     }
   
 }

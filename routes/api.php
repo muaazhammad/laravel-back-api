@@ -13,10 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('tokencheck', 'api\ApiController@checking');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 
 //api routes to login and register
 Route::post('login', 'api\ApiController@login');
@@ -59,42 +60,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::put('months/{id}', 'api\monthsController@update');
     Route::delete('months/{id}', 'api\monthsController@destroy');
 
-   
-    Route::get('tt', 'api\ApiController@check');
 });
 
+Route::get('tokencheck', 'api\ApiController@isTokenValid');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// email verification routes
-// i duplicate the routes & controllers, provided by laravel auth for email verification
-// and change there responses to json.
-//Route::get('email/verify/{id}', 'api\VerificationController@verify')->name('verification.verify');
-//Route::get('email/resend', 'api\VerificationController@resend')->name('verification.resend');
-//
-//
-//// api password forgot and reset routes
-//// i duplicate the routes & controllers, provided by laravel auth for password forgot/and reset
-//// and change there responses to json.
-//Route::post('password/email', 'api\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-//Route::post('password/reset', 'api\ResetPasswordController@reset')->name('password.update');
-//
-//
